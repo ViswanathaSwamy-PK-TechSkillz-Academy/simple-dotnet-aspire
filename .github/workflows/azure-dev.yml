@@ -58,4 +58,5 @@ jobs:
         run: azd provision --no-prompt
 
       - name: Deploy Application
+        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
         run: azd deploy --no-prompt
