@@ -54,6 +54,7 @@ jobs:
         shell: pwsh
 
       - name: Provision Infrastructure
+        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
         run: azd provision --no-prompt
 
       - name: Deploy Application
