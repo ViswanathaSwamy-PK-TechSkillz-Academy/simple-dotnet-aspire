@@ -83,7 +83,7 @@ jobs:
         shell: pwsh
 
       - name: Provision Infrastructure
-        run: azd provision --no-prompt
+        run: azd provision --environment ${{ env.AZURE_ENV_NAME }} --location ${{ env.AZURE_LOCATION }} --no-prompt
 
   deploy-resources:
     runs-on: ubuntu-latest
@@ -111,4 +111,4 @@ jobs:
         shell: pwsh
 
       - name: Deploy Application
-        run: azd deploy --no-prompt
+        run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
