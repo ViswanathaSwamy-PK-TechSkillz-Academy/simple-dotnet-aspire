@@ -113,4 +113,7 @@ jobs:
         shell: pwsh
 
       - name: Deploy Application
+        env:
+          AZURE_CONTAINER_ENVIRONMENT_NAME: ${{ env.AZURE_CONTAINER_ENVIRONMENT_NAME }}
+          SERVICE_APISERVICE_CONTAINER_ENVIRONMENT_NAME: ${{ env.AZURE_CONTAINER_ENVIRONMENT_NAME }}
         run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
