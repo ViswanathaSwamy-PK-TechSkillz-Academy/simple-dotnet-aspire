@@ -18,6 +18,7 @@ env:
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+  NODE_VERSION: 20.x
 
 defaults:
   run:
@@ -30,6 +31,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Azure Developer CLI (azd)
         uses: Azure/setup-azd@v0.1.0
@@ -59,6 +65,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
       - name: Install Azure Developer CLI (azd)
         uses: Azure/setup-azd@v0.1.0
 
@@ -72,7 +83,7 @@ jobs:
         shell: pwsh
 
       - name: Provision Infrastructure
-        run: azd provision --no-prompt
+        run: azd provision --environment ${{ env.AZURE_ENV_NAME }} --location ${{ env.AZURE_LOCATION }} --no-prompt
 
   deploy-resources:
     runs-on: ubuntu-latest
@@ -81,6 +92,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Azure Developer CLI (azd)
         uses: Azure/setup-azd@v0.1.0
@@ -95,4 +111,4 @@ jobs:
         shell: pwsh
 
       - name: Deploy Application
-        run: azd deploy --no-prompt
+        run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
