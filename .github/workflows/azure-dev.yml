@@ -19,17 +19,13 @@ env:
   AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
 
+defaults:
+  run:
+    working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
-
-    defaults:
-      run:
-        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
 
     steps:
       - name: Checkout code
@@ -59,10 +55,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
-    defaults:
-      run:
-        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -70,16 +62,15 @@ jobs:
       - name: Install Azure Developer CLI (azd)
         uses: Azure/setup-azd@v0.1.0
 
+      - name: Install .NET Aspire workload
+        run: dotnet workload install aspire
+
       - name: Provision Infrastructure
         run: azd provision --no-prompt
 
   deploy-resources:
     runs-on: ubuntu-latest
     needs: deploy-infrastructure
-
-    defaults:
-      run:
-        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
 
     steps:
       - name: Checkout code
