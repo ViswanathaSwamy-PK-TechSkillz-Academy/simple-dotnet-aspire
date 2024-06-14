@@ -19,6 +19,8 @@ env:
   AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
   NODE_VERSION: 20.x
+  AZURE_CONTAINER_ENVIRONMENT_NAME: "cae-eyybrektacb44"
+  AZURE_CONTAINER_REGISTRY_NAME: "acreyybrektacb44"
 
 defaults:
   run:
