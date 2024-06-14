@@ -20,7 +20,7 @@ env:
   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
   NODE_VERSION: 20.x
   AZURE_CONTAINER_ENVIRONMENT_NAME: "cae-eyybrektacb44"
-  AZURE_CONTAINER_REGISTRY_NAME: "acreyybrektacb44"
+  # AZURE_CONTAINER_REGISTRY_NAME: "acreyybrektacb44"
 
 defaults:
   run:
@@ -115,5 +115,5 @@ jobs:
       - name: Deploy Application
         env:
           AZURE_CONTAINER_ENVIRONMENT_NAME: ${{ env.AZURE_CONTAINER_ENVIRONMENT_NAME }}
-          SERVICE_APISERVICE_CONTAINER_ENVIRONMENT_NAME: ${{ env.AZURE_CONTAINER_ENVIRONMENT_NAME }}
+          # SERVICE_APISERVICE_CONTAINER_ENVIRONMENT_NAME: ${{ env.AZURE_CONTAINER_ENVIRONMENT_NAME }}
         run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
