@@ -22,6 +22,10 @@ jobs:
       AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
       AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
 
+    defaults:
+      run:
+        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -54,9 +58,7 @@ jobs:
         shell: pwsh
 
       - name: Provision Infrastructure
-        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
         run: azd provision --no-prompt
 
       - name: Deploy Application
-        working-directory: ./Aspire.StarterApp/Aspire.StarterApp.AppHost
         run: azd deploy --no-prompt
