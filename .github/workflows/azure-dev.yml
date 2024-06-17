@@ -102,6 +102,9 @@ jobs:
           azd auth login --client-id ${{ env.AZURE_CLIENT_ID }} --federated-credential-provider "github" --tenant-id ${{ env.AZURE_TENANT_ID }}
         shell: pwsh
 
+      - name: Print Environment Variables
+        run: env
+
       - name: Deploy Application
         env:
           AZURE_LOCATION: ${{ env.AZURE_LOCATION }} # Ensure AZURE_LOCATION is set for the deploy step
