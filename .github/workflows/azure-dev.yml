@@ -130,4 +130,4 @@ jobs:
       - name: Deploy Application
         run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt # --debug
         env:
-          AZURE_LOCATION: $(AZURE_LOCATION)
+          AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
