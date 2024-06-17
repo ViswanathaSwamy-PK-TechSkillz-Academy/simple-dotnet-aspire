@@ -108,4 +108,4 @@ jobs:
       - name: Deploy Application
         env:
           AZURE_LOCATION: ${{ env.AZURE_LOCATION }} # Ensure AZURE_LOCATION is set for the deploy step
-        run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
+        run: azd deploy --debug --no-prompt # --environment ${{ env.AZURE_ENV_NAME }}
