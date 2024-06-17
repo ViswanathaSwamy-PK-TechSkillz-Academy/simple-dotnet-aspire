@@ -59,56 +59,60 @@ jobs:
           azd auth login --client-id $($info.clientId) --client-secret $($info.clientSecret) --tenant-id $($info.tenantId)
         shell: pwsh
 
-  deploy-infrastructure:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Azure Developer CLI (azd)
-        uses: Azure/setup-azd@v0.1.0
-
-      - name: Install .NET Aspire workload
-        run: dotnet workload install aspire
-
-      - name: Log in with Azure (Federated Credentials)
-        if: ${{ env.AZURE_CLIENT_ID != '' }}
-        run: |
-          azd auth login --client-id ${{ env.AZURE_CLIENT_ID }} --federated-credential-provider "github" --tenant-id ${{ env.AZURE_TENANT_ID }}
-        shell: pwsh
-
-      - name: Provision Infrastructure
-        run: azd provision --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
-
-  deploy-application:
-    runs-on: ubuntu-latest
-    needs: deploy-infrastructure
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Azure Developer CLI (azd)
-        uses: Azure/setup-azd@v0.1.0
-
-      - name: Install .NET Aspire workload
-        run: dotnet workload install aspire
-
-      - name: Log in with Azure (Federated Credentials)
-        if: ${{ env.AZURE_CLIENT_ID != '' }}
-        run: |
-          azd auth login --client-id ${{ env.AZURE_CLIENT_ID }} --federated-credential-provider "github" --tenant-id ${{ env.AZURE_TENANT_ID }}
-        shell: pwsh
-
-      - name: Print Environment Variables
-        run: env
-
-      - name: Set environment variables
-        run: echo "AZURE_LOCATION=eastus" >> $GITHUB_ENV
-
       - name: Deploy Application
-        # env:
-        #   AZURE_LOCATION: ${{ env.AZURE_LOCATION }} # Ensure AZURE_LOCATION is set for the deploy step
         run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt # --debug
+
+
+  # deploy-infrastructure:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Install Azure Developer CLI (azd)
+  #       uses: Azure/setup-azd@v0.1.0
+
+  #     - name: Install .NET Aspire workload
+  #       run: dotnet workload install aspire
+
+  #     - name: Log in with Azure (Federated Credentials)
+  #       if: ${{ env.AZURE_CLIENT_ID != '' }}
+  #       run: |
+  #         azd auth login --client-id ${{ env.AZURE_CLIENT_ID }} --federated-credential-provider "github" --tenant-id ${{ env.AZURE_TENANT_ID }}
+  #       shell: pwsh
+
+  #     - name: Provision Infrastructure
+  #       run: azd provision --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
+
+  # deploy-application:
+  #   runs-on: ubuntu-latest
+  #   needs: deploy-infrastructure
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Install Azure Developer CLI (azd)
+  #       uses: Azure/setup-azd@v0.1.0
+
+  #     - name: Install .NET Aspire workload
+  #       run: dotnet workload install aspire
+
+  #     - name: Log in with Azure (Federated Credentials)
+  #       if: ${{ env.AZURE_CLIENT_ID != '' }}
+  #       run: |
+  #         azd auth login --client-id ${{ env.AZURE_CLIENT_ID }} --federated-credential-provider "github" --tenant-id ${{ env.AZURE_TENANT_ID }}
+  #       shell: pwsh
+
+  #     - name: Print Environment Variables
+  #       run: env
+
+  #     - name: Set environment variables
+  #       run: echo "AZURE_LOCATION=eastus" >> $GITHUB_ENV
+
+  #     - name: Deploy Application
+  #       # env:
+  #       #   AZURE_LOCATION: ${{ env.AZURE_LOCATION }} # Ensure AZURE_LOCATION is set for the deploy step
+  #       run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt # --debug
