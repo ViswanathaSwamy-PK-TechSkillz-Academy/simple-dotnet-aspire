@@ -12,13 +12,12 @@ permissions:
   contents: read
 
 env:
-  AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
-  AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
-  AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-  AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
-  AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
-  NODE_VERSION: 20.x
+  AZURE_ENV_NAME: ${{ secrets.AZURE_ENV_NAME }}
+  AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
   AZURE_CONTAINER_ENVIRONMENT_NAME: "cae-eyybrektacb44"
   SERVICE_APISERVICE_CONTAINER_ENVIRONMENT_NAME: "apiservice"
 
@@ -33,11 +32,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Azure Developer CLI (azd)
         uses: Azure/setup-azd@v0.1.0
@@ -67,11 +61,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
       - name: Install Azure Developer CLI (azd)
         uses: Azure/setup-azd@v0.1.0
 
@@ -94,11 +83,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Azure Developer CLI (azd)
         uses: Azure/setup-azd@v0.1.0
