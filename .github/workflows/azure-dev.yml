@@ -26,8 +26,6 @@ env:
   AZURE_LOG_ANALYTICS_WORKSPACE_NAME: ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE_NAME }}
   MANAGED_IDENTITY_CLIENT_ID: ${{ secrets.MANAGED_IDENTITY_CLIENT_ID }}
   MANAGED_IDENTITY_NAME: ${{ secrets.MANAGED_IDENTITY_NAME }}
-  # AZURE_CONTAINER_ENVIRONMENT_NAME: "cae-eyybrektacb44"
-  # SERVICE_APISERVICE_CONTAINER_ENVIRONMENT_NAME: "apiservice"
 
 defaults:
   run:
@@ -105,7 +103,6 @@ jobs:
         shell: pwsh
 
       - name: Deploy Application
-        # env:
-        #   AZURE_CONTAINER_ENVIRONMENT_NAME: ${{ env.AZURE_CONTAINER_ENVIRONMENT_NAME }}
-        #   SERVICE_APISERVICE_CONTAINER_ENVIRONMENT_NAME: ${{ env.SERVICE_APISERVICE_CONTAINER_ENVIRONMENT_NAME }}
+        env:
+          AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }} # Ensure AZURE_LOCATION is set for the deploy step
         run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
