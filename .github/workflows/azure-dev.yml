@@ -105,7 +105,10 @@ jobs:
       - name: Print Environment Variables
         run: env
 
+      - name: Set environment variables
+        run: echo "AZURE_LOCATION=eastus" >> $GITHUB_ENV
+
       - name: Deploy Application
-        env:
-          AZURE_LOCATION: ${{ env.AZURE_LOCATION }} # Ensure AZURE_LOCATION is set for the deploy step
+        # env:
+        #   AZURE_LOCATION: ${{ env.AZURE_LOCATION }} # Ensure AZURE_LOCATION is set for the deploy step
         run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt # --debug
