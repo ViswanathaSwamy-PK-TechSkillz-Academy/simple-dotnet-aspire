@@ -60,7 +60,7 @@ jobs:
         shell: pwsh
 
       - name: Deploy Application
-        run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt # --debug
+        run: azd deploy --no-prompt # --debug
 
 
   # deploy-infrastructure:
