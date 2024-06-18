@@ -60,6 +60,9 @@ jobs:
           azd auth login --client-id $($info.clientId) --client-secret $($info.clientSecret) --tenant-id $($info.tenantId)
         shell: pwsh
 
+      - name: Set environment variables
+        run: echo "AZURE_LOCATION=eastus" >> $GITHUB_ENV
+
   deploy-infrastructure:
     runs-on: ubuntu-latest
     needs: build
