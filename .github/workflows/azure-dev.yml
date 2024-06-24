@@ -18,6 +18,8 @@ env:
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+  AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+  AZD_ALPHA_ENABLE_RESOURCEGROUPDEPLOYMENTS: "true"
 
 defaults:
   run:
@@ -69,6 +71,9 @@ jobs:
       - name: Install .NET Aspire workload
         run: dotnet workload install aspire
 
+      - name: Configure AZD for Resource Group Deployments
+        run: azd config set alpha.resourceGroupDeployments on
+
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
         run: |
@@ -88,7 +93,6 @@ jobs:
         run: azd provision --environment ${{ env.AZURE_ENV_NAME }} --no-prompt
         env:
           AZD_INITIAL_ENVIRONMENT_CONFIG: ${{ secrets.AZD_INITIAL_ENVIRONMENT_CONFIG }}
-           
 
   deploy-application:
     runs-on: ubuntu-latest
@@ -103,6 +107,9 @@ jobs:
 
       - name: Install .NET Aspire workload
         run: dotnet workload install aspire
+
+      - name: Configure AZD for Resource Group Deployments
+        run: azd config set alpha.resourceGroupDeployments on
 
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
