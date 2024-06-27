@@ -6,6 +6,9 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddProblemDetails();
 
+var sqlDbConnectionString = builder.Configuration.GetConnectionString("SqlDbConnectionString");
+Console.WriteLine($"Connection String: {sqlDbConnectionString}");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -15,6 +18,11 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
+app.MapGet("/sqldbconnstr", () =>
+{
+    return sqlDbConnectionString;
+});
 
 app.MapGet("/weatherforecast", () =>
 {
