@@ -6,7 +6,7 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddProblemDetails();
 
-var sqlDbConnectionString = builder.Configuration.GetConnectionString("SqlDbConnectionString") ?? string.Empty;
+var sqlDbConnectionString = builder.Configuration.GetConnectionString("SqlDbConnectionString") ?? "ConnectionStringNotFound";
 Console.WriteLine($"Connection String: {sqlDbConnectionString}");
 
 var app = builder.Build();
