@@ -21,6 +21,11 @@ public class WeatherApiClient(HttpClient httpClient)
 
         return forecasts?.ToArray() ?? [];
     }
+
+    public async Task<string> GetSqlDbConnectionStringAsync(CancellationToken cancellationToken = default)
+    {
+        return await httpClient.GetStringAsync("/sqldbconnstr", cancellationToken);
+    }
 }
 
 public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
