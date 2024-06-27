@@ -22,6 +22,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        sqlDbConnectionString = await WeatherApi.GetSqlDbConnectionStringAsync();
+        try
+        {
+            sqlDbConnectionString = await WeatherApi.GetSqlDbConnectionStringAsync();
+        }
+        catch (Exception)
+        {
+            sqlDbConnectionString = "Empty_String";
+        }
     }
 }
