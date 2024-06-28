@@ -9,5 +9,8 @@ azd init
 
 azd auth login --scope https://management.azure.com//.default
 
+azd config set alpha.infraSynth on
+azd infra synth
+
 azd up
 ```
