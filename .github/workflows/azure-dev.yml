@@ -20,7 +20,7 @@ env:
   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
   AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
   AZD_ALPHA_ENABLE_RESOURCEGROUPDEPLOYMENTS: "true"
-  SqlDbConnStr: ${{ secrets.SqlDbConnStr }}
+  AZURE_SQL_DB_CONN_STR: ${{ secrets.SqlDbConnStr }}
 
 defaults:
   run:
@@ -142,4 +142,4 @@ jobs:
         run: azd deploy --environment ${{ env.AZURE_ENV_NAME }} --no-prompt # --debug
         env:
           AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
-          SqlDbConnStr: ${{ env.SqlDbConnStr }}
+          AZURE_SQL_DB_CONN_STR: ${{ env.AZURE_SQL_DB_CONN_STR }}

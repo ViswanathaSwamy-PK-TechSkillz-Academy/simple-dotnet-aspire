@@ -5,6 +5,9 @@
       "principalId": {
         "value": "${AZURE_PRINCIPAL_ID}"
       },
+      "SqlDbConnStr": {
+        "value": "${AZURE_SQL_DB_CONN_STR}"
+      },
       "environmentName": {
         "value": "${AZURE_ENV_NAME}"
       },
