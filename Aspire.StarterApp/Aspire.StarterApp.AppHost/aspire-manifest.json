@@ -13,6 +13,17 @@
         }
       }
     },
+    "SqlDbConnectionString": {
+      "type": "parameter.v0",
+      "connectionString": "{SqlDbConnectionString.value}",
+      "value": "{SqlDbConnectionString.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
     "apiservice": {
       "type": "project.v0",
       "path": "../Aspire.StarterApp.ApiService/Aspire.StarterApp.ApiService.csproj",
