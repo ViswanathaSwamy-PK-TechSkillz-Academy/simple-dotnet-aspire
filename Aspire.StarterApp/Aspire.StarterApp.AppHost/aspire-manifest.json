@@ -13,6 +13,17 @@
         }
       }
     },
+    "SqlDbConnStr": {
+      "type": "parameter.v0",
+      "connectionString": "{SqlDbConnStr.value}",
+      "value": "{SqlDbConnStr.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
     "apiservice": {
       "type": "project.v0",
       "path": "../Aspire.StarterApp.ApiService/Aspire.StarterApp.ApiService.csproj",
@@ -20,7 +31,9 @@
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
-        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true"
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "ConnectionStrings__cache": "{cache.connectionString}",
+        "ConnectionStrings__SqlDbConnStr": "{SqlDbConnStr.connectionString}"
       },
       "bindings": {
         "http": {

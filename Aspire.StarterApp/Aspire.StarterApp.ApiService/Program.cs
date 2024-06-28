@@ -6,7 +6,9 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddProblemDetails();
 
-var sqlDbConnectionString = builder.Configuration.GetConnectionString("SqlDbConnectionString") ?? "ConnectionStringNotFound";
+var sqlDbConnectionString = builder.Configuration.GetConnectionString("SqlDbConnStr") ?? "SQLDbConnectionStringNotFound";
+Console.WriteLine($"Connection String: {sqlDbConnectionString}");
+var cacheConnectionString = builder.Configuration.GetConnectionString("cache") ?? "CacheConnectionStringNotFound";
 Console.WriteLine($"Connection String: {sqlDbConnectionString}");
 
 var app = builder.Build();
@@ -21,7 +23,7 @@ var summaries = new[]
 
 app.MapGet("/sqldbconnstr", () =>
 {
-    return sqlDbConnectionString;
+    return $"{sqlDbConnectionString} :: {cacheConnectionString}";
 });
 
 app.MapGet("/weatherforecast", () =>
