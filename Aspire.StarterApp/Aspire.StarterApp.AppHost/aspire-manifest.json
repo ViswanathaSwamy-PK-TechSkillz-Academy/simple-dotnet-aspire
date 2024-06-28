@@ -13,10 +13,10 @@
         }
       }
     },
-    "SqlDbConnectionString": {
+    "SqlDbConnStr": {
       "type": "parameter.v0",
-      "connectionString": "{SqlDbConnectionString.value}",
-      "value": "{SqlDbConnectionString.inputs.value}",
+      "connectionString": "{SqlDbConnStr.value}",
+      "value": "{SqlDbConnStr.inputs.value}",
       "inputs": {
         "value": {
           "type": "string",
@@ -32,7 +32,8 @@
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
         "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
-        "ConnectionStrings__SqlDbConnectionString": "{SqlDbConnectionString.connectionString}"
+        "ConnectionStrings__cache": "{cache.connectionString}",
+        "ConnectionStrings__SqlDbConnStr": "{SqlDbConnStr.connectionString}"
       },
       "bindings": {
         "http": {
